@@ -8,16 +8,19 @@ import {
   ThirdPersonCamera,
   World,
   types,
+  usePreload,
+  useWindowSize,
 } from "lingo3d-react";
-import { useCallback, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 
-const App = () => {
+const Game = () => {
   const [arrowPosition, setArrowPosition] = useState({ x: 0, y: 0, z: 0 });
   const dummyRef = useRef<types.Dummy>(null);
   const [running, setRunning] = useState(false);
+  const { width } = useWindowSize()
 
-  const handleClick = useCallback((e: types.MouseEvent) => {
+  const handleClick = (e: types.MouseEvent) => {
     const dummy = dummyRef.current;
     if (!dummy) return;
 
@@ -29,7 +32,7 @@ const App = () => {
     dummy.onMoveToEnd = () => {
       setRunning(false);
     };
-  }, []);
+  };
 
   return (
     <World>
@@ -44,7 +47,7 @@ const App = () => {
         src="scene.glb"
         onClick={handleClick}
       />
-      <ThirdPersonCamera active mouseControl="drag" lockTargetRotation={false}>
+      <ThirdPersonCamera active mouseControl="drag" lockTargetRotation={false} fov={width < 640 ? 110 : 90}>
         <Dummy
           physics="character"
           ref={dummyRef}
@@ -100,6 +103,19 @@ const App = () => {
       />
     </World>
   );
+};
+
+const App = () => {
+  const progress = usePreload(["scene.glb"], "1.2mb");
+
+  if (progress < 100)
+    return (
+      <div className="w-screen h-screen absolute left-0 top-0 text-white bg-black flex items-center justify-center">
+        loaded: {Math.round(progress)}%
+      </div>
+    );
+
+  return <Game />;
 };
 
 export default App;
