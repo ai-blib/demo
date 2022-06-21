@@ -10,6 +10,7 @@ import {
   types,
   usePreload,
   useWindowSize,
+  LingoEditor,
 } from "lingo3d-react";
 import { useRef, useState } from "react";
 import "./App.css";
@@ -54,6 +55,7 @@ const Game = () => {
           metalnessFactor={0.5}
           roughnessFactor={0.5}
           animation={running ? "running" : "idle"}
+          bloom
           y={44.58}
         />
       </ThirdPersonCamera>
@@ -62,18 +64,7 @@ const Game = () => {
         scaleX={113.2}
         scaleY={113.2}
         rotationX={-90}
-        normalScale={{ x: 1, y: 1 }}
-      />
-      <AreaLight
-        x={-25.87}
-        y={3392.78}
-        z={9.76}
-        scaleX={69.3}
-        scaleY={69.3}
-        rotationX={-90}
-        color="white"
-        intensity={2.6}
-        helper={false}
+        contrast={1}
       />
       {running && (
         <SvgMesh
@@ -97,7 +88,7 @@ const Game = () => {
       )}
       <Setup
         defaultFog="white"
-        defaultLight={false}
+        defaultLight="env1.jpg"
         bloomStrength={1}
         bloomThreshold={0.5}
       />
