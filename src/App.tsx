@@ -36,7 +36,7 @@ const Game = () => {
   return (
     <World>
       <Model
-        physics="map"
+        physics="map-debug"
         bloom
         width={245.36}
         depth={245.36}
