@@ -36,7 +36,7 @@ const Game = () => {
   return (
     <World>
       <Model
-        physics="map-debug"
+        physics="map"
         bloom
         width={245.36}
         depth={245.36}
@@ -88,7 +88,7 @@ const Game = () => {
         defaultLight="env1.jpg"
         bloomStrength={1}
         bloomThreshold={0.5}
-        antiAlias="MSAA"
+        antiAlias="SSAA"
       />
     </World>
   );
