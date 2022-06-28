@@ -1,5 +1,4 @@
 import {
-  AreaLight,
   Dummy,
   Model,
   Reflector,
@@ -18,7 +17,7 @@ const Game = () => {
   const [arrowPosition, setArrowPosition] = useState({ x: 0, y: 0, z: 0 });
   const dummyRef = useRef<types.Dummy>(null);
   const [running, setRunning] = useState(false);
-  const { width } = useWindowSize()
+  const { width } = useWindowSize();
 
   const handleClick = (e: types.MouseEvent) => {
     const dummy = dummyRef.current;
@@ -37,7 +36,7 @@ const Game = () => {
   return (
     <World>
       <Model
-        physics="map"
+        physics="map-debug"
         bloom
         width={245.36}
         depth={245.36}
@@ -47,7 +46,13 @@ const Game = () => {
         src="scene.glb"
         onClick={handleClick}
       />
-      <ThirdPersonCamera active mouseControl="drag" lockTargetRotation={false} fov={width < 640 ? 110 : 90}>
+      <ThirdPersonCamera
+        active
+        mouseControl="drag"
+        lockTargetRotation={false}
+        fov={width < 640 ? 110 : 90}
+        enableDamping
+      >
         <Dummy
           physics="character"
           ref={dummyRef}
