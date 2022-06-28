@@ -10,7 +10,6 @@ import {
   types,
   usePreload,
   useWindowSize,
-  LingoEditor,
 } from "lingo3d-react";
 import { useRef, useState } from "react";
 import "./App.css";
