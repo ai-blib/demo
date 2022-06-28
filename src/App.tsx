@@ -63,13 +63,6 @@ const Game = () => {
           y={44.58}
         />
       </ThirdPersonCamera>
-      <Reflector
-        y={-39.38}
-        scaleX={113.2}
-        scaleY={113.2}
-        rotationX={-90}
-        contrast={1}
-      />
       {running && (
         <SvgMesh
           bloom
@@ -95,6 +88,7 @@ const Game = () => {
         defaultLight="env1.jpg"
         bloomStrength={1}
         bloomThreshold={0.5}
+        antiAlias="MSAA"
       />
     </World>
   );
