@@ -46,7 +46,7 @@ const Game = () => {
 
       {/* Ground reflection */}
       {/* 地面反射 */}
-      <Reflector y={-39.38} scale={113.2} rotationX={-90} blur={512} />
+      <Reflector y={-39.38} scale={113.2} />
 
       {/* Character dummy, and the camera that follows it */}
       {/* 角色假人，以及跟随它的相机 */}
