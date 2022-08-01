@@ -5,7 +5,9 @@ import {
   SvgMesh,
   ThirdPersonCamera,
   World,
-  usePreload
+  usePreload,
+  DirectionalLight,
+  Environment
 } from "lingo3d-react"
 import { useState } from "react"
 import "./App.css"
@@ -26,27 +28,29 @@ const Game = () => {
     // World has white fog, environment image based lighting, and bloom effect
     // 场景有白色雾效，基于图片的环境光照，并且有泛光效果
     <World
-      defaultFog="white"
-      defaultLight="env.jpg"
-      bloomStrength={1}
-      bloomThreshold={0.5}
+        defaultFog={'false'}
+        skybox="drackenstein_quarry_4k (1).hdr"
+        // bloom={true}
+        // bloomStrength={0.4}
+        // bloomRadius={1}
     >
       {/* Map model; when clicked, set arrow position and running state */}
       {/* 地图模型，点击时设置箭头位置以及跑步状态 */}
       <Model
         physics="map"
-        bloom
-        scale={20}
-        src="stadium.glb"
+        scale={40}
+        src="场景11.glb"
         onClick={(e) => {
           setArrowPosition(e.point)
           setRunning(true)
         }}
       />
+      <Environment  texture={'drackenstein_quarry_4k (1).hdr'} />
+      {/*<DirectionalLight y={1000} x={-1000} z={1000} />*/}
 
       {/* Ground reflection */}
       {/* 地面反射 */}
-      <Reflector y={-39.38} scale={113.2} />
+      {/*<Reflector y={-39.38} scale={113.2} />*/}
 
       {/* Character dummy, and the camera that follows it */}
       {/* 角色假人，以及跟随它的相机 */}
@@ -60,7 +64,7 @@ const Game = () => {
           physics="character"
           metalnessFactor={-0.5}
           roughnessFactor={0}
-          y={44.58}
+          y={-500}
           // 4 arguments of lookTo are: x, y, z, and alpha. Smaller alpha means slower speed.
           // lookTo 的4个参数：x, y, z, 和 alpha。alpha 越小，速度越慢。
           lookTo={[arrowPosition.x, undefined, arrowPosition.z, 0.1]}
@@ -81,7 +85,6 @@ const Game = () => {
       {running && (
         <SvgMesh
           src="arrow.svg"
-          bloom
           metalnessFactor={1}
           roughnessFactor={0.4}
           roughness={0.4}
@@ -89,7 +92,7 @@ const Game = () => {
           color="#ff4e4e"
           emissiveColor="#223056"
           x={arrowPosition.x}
-          y={arrowPosition.y + 50}
+          y={arrowPosition.y+10}
           z={arrowPosition.z}
           animation={{ rotationY: [0, 45, 90, 135, 180, 225, 270, 315, 360] }}
         />
